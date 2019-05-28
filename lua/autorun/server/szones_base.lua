@@ -129,6 +129,30 @@ function SZones.GetZones()
 	return Tab
 end
 
+function SZones.GetZoneEnts(SZ)
+	if not SZ.Hold then return end
+
+	local Tab = {}
+	local Num = 0
+
+	for K in pairs(SZ.Hold) do
+		Num = Num+1
+		Tab[Num] = K
+	end
+
+	return Tab
+end
+
+function SZones.GetZoneEntsLookup(SZ)
+	if not SZ.Hold then return end
+
+	local Tab = {}
+
+	for K in pairs(SZ.Hold) do Tab[K] = true end
+
+	return Tab
+end
+
 function ENT:InSafezone() -- Preferred over VEC:InSafezone()
 	return IsValid(self.SZContainers)
 end
