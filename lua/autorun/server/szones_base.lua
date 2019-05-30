@@ -109,11 +109,24 @@ local function ClearSpawns(Ply)
 	Save()
 end
 
+local function ClearZones(Ply)
+	if IsValid(Ply) and not Ply:IsSuperAdmin() then return end
+
+	for K, V in pairs(SZones.Zones) do
+		SZones.Zones[K] = nil
+		V.Trigger:Remove()
+	end
+
+	SZones.Zones = {}
+	Save()
+end
+
 concommand.Add("sz_add", Add)
 concommand.Add("sz_remove", Remove)
 concommand.Add("sz_setcolor", SetColor)
 concommand.Add("sz_addspawn", AddSpawn)
 concommand.Add("sz_clearspawns", ClearSpawns)
+concommand.Add("sz_clearzones", ClearZones)
 
 --=====================================================================================--
 -- Helper Functions
@@ -196,6 +209,7 @@ hook.Add("PlayerSpawn", "SZones Spawn", function(Ply)
 end)
 
 hook.Add("PlayerNoClip", "SZones Noclip", function(Ply, State)
+	if not next(SZones.Zones) then return true end
 	if State == false   then return true end
 	if Ply:IsAdmin()    then return true end
 	if Ply:InSafezone() then return true end
