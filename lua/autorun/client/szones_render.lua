@@ -1,7 +1,7 @@
 local DrawSafezones = true
 
 local function DrawZones(Depth, Skybox)
-	if Skybox then return end
+	if not Skybox then return end
 	--cam.Start3D( LocalPlayer():EyePos(), LocalPlayer():EyeAngles() )
 	for _, Zone in pairs(ents.FindByClass("szones_trigger")) do
 		local Col = Zone:GetNW2Vector("Color", Color)
