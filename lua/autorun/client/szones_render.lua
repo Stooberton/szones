@@ -20,7 +20,7 @@ local function ToggleZones()
 		hook.Add("PostDrawOpaqueRenderables", "SZones Draw", DrawZones)
 	end
 
-	print("Safezone drawing "..(DrawSafezones and "enabled" or "disabled"))
+	print("Safezone drawing " .. (DrawSafezones and "enabled" or "disabled"))
 end
 
 hook.Add("PostDrawOpaqueRenderables", "SZones Draw", DrawZones)

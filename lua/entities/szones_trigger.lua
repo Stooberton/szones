@@ -40,7 +40,7 @@ if SERVER then
 
 	function ENT:StartTouch(Ent)
 		if self.Poly then
-
+			-- Placeholder for polygonal safezones
 		else
 			print("Started touching", Ent)
 			self.Hold[Ent] = true
@@ -67,9 +67,9 @@ if SERVER then
 
 	function ENT:OnRemove()
 		if SZones.Zones[self.Name] then -- If the safezone was removed by something other than SZones
-			print("Safezone removed by something")
+			print("Safezone removed by something, replacing. . .")
 
-			local D = SZones.Zone[self.Name]
+			local D = SZones.Zones[self.Name]
 
 			timer.Simple(0, function() -- Replace the safezone
 				SZones.CreateZone(D.Pos, D.Ang, D.Mins, D.Maxs, D.Name, D.Color)

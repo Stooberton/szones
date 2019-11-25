@@ -6,7 +6,7 @@ if not SZones then
 		SZones.Zones = {}
 		SZones.Spawns = {}
 		SZones.MAP  = game.GetMap()
-		SZones.PATH = "szones/"..SZones.MAP..".txt"
+		SZones.PATH = "szones/" .. SZones.MAP .. ".txt"
 end
 --=====================================================================================--
 -- Loading Safezones
@@ -29,7 +29,7 @@ hook.Add("Initialize", "SZones Init", function()
 	if next(Spawns) then
 		local Num = 0
 		for _, V in pairs(Spawns) do
-			Num = Num+1
+			Num = Num + 1
 			SZones.Spawns[Num] = V
 		end
 	end
@@ -56,7 +56,7 @@ local function Add(Ply, _, Args)
 
 	OrderVectors(Min, Max)
 
-	SZones.CreateZone((Min+Max)*0.5, Angle(0, 0, 0), Min, Max, tostring(Args[7]), Color(0, 255, 160))
+	SZones.CreateZone((Min + Max) * 0.5, Angle(0, 0, 0), Min, Max, tostring(Args[7]), Color(0, 255, 160))
 	Save()
 
 end
@@ -96,7 +96,7 @@ local function AddSpawn(Ply)
 	if Tr.HitNonWorld then return end
 	if Tr.HitSky then return end
 
-	SZones.Spawns[#SZones.Spawns+1] = Tr.HitPos
+	SZones.Spawns[#SZones.Spawns + 1] = Tr.HitPos
 
 	Save()
 end
@@ -149,7 +149,7 @@ function SZones.GetZoneEnts(SZ)
 	local Num = 0
 
 	for K in pairs(SZ.Hold) do
-		Num = Num+1
+		Num = Num + 1
 		Tab[Num] = K
 	end
 
@@ -167,7 +167,7 @@ function SZones.GetZoneEntsLookup(SZ)
 end
 
 function ENT:InSafezone() -- Preferred over VEC:InSafezone()
-	return IsValid(self.SZContainers)
+	return self.SZContainers and true or false
 end
 
 function ENT:GetSafezones()
@@ -186,7 +186,7 @@ function VEC:InSafezone() -- Much slower than ENT:InSafezone()
 	local X, Y, Z = self.x, self.y, self.z
 
 	for _, V in pairs(SZones.Zones) do
-		local Mins, Maxs = V.Pos+V.Mins, V.Pos+V.Maxs
+		local Mins, Maxs = V.Pos + V.Mins, V.Pos + V.Maxs
 
 		if X > Mins.x and X < Maxs.x
 			and Y > Mins.y and Y < Maxs.y

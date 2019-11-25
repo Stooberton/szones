@@ -6,18 +6,18 @@ if SERVER then
 	end)
 
 	hook.Add("ACF_FireShell", "SZones", function(Gun)
-		if Gun:InSafezone() then return end
+		if Gun:InSafezone() then return false end
 	end)
 
 	hook.Add("ACF_AmmoExplode", "SZones", function(Ammo)
-		if Ammo:InSafezone() then return end
+		if Ammo:InSafezone() then return false end
 	end)
 
 	hook.Add("ACF_FuelExplode", "SZones", function(Fuel)
-		if Fuel:InSafezone() then return end
+		if Fuel:InSafezone() then return false end
 	end)
 
 	hook.Add("ACF_KEShove", "SZones", function(Target)
-		if Target:InSafezone() then return end
+		if Target:InSafezone() then return false end
 	end)
 end
